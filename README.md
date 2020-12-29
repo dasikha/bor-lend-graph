@@ -62,7 +62,7 @@ The MVP for the borrowing section will mainly be on the loan creation and listin
 
 ## Resources
 
-- [API Routes Design](docs/Bor-Lend_ API Routes Design.docx)
+- [API Routes Design](https://github.com/njas17/bor-lend/docs/Bor-Lend_API_Routes_Design.docx)
 - [Technical Specification](https://xxxx)
 
 ## Notes
