@@ -5,7 +5,7 @@ In this repository, you will use Nodes/Express, mySQL and Vue to build an SPA (S
 ## Table of contents
 
 * [Project Description](#project-description)
-* [Database Schema - API](#database-schema)
+* [Database Schema and API](#database-schema-and-api)
 * [Setup](#setup)
 * [Basic Requirements](#basic-requirements)
 
@@ -33,7 +33,7 @@ The MVP for the borrowing section will mainly be on the loan creation and listin
 * Use API to get data from the database mySQL. Express as the middleware.
 * Use state to respond to changes.
 
-## Database Schema - API
+## Database Schema and API
 
 ![DB Schema](docs/proj1_db_scheme.PNG)
 
