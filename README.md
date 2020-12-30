@@ -1,6 +1,6 @@
 # Fullstack
 
-In this repository, you will use Node Express, mySQL and Vue to build a SPA (Single Page Application) for the MVP.
+In this repository, you will use Nodes, Express, mySQL and Vue to build an SPA (Single Page Application) for the MVP.
 
 ## Project Description
 
@@ -17,7 +17,7 @@ THIS APPLICATION keeps the history of the borrowing as well the payment made wit
 
 ## MVP
 
-The MVP for the borrowing section will mainly be on the loan creation and listing (borrow data), loan history insertion (paid information) and deletion of the borrow activities. At the same time, there is a summary of the total payment done and current borrowed amount.
+The MVP for the borrowing section will mainly be on the loan creation and listing (borrow data), loan history insertion of the payment information and deletion of the borrow activities. At the same time, there is a summary of the total payment done and current borrowed amount.
 
 ## Objectives
 
