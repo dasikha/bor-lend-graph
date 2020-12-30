@@ -1,12 +1,12 @@
 # Fullstack
 
-In this repository, you will use Nodes, Express, mySQL and Vue to build a SPA (Single Page Application) for the MVP.
+In this repository, you will use Node Express, mySQL and Vue to build a SPA (Single Page Application) for the MVP.
 
-## Project Statement
+## Project Description
 
 The overall project is to assist user to monitor the borrowing and lending activities/history between a borrower to a lender or vice-versa. At the same time, the application should promote and instill healthy borrowing habits in the user. For this, project phase, we will work on the borrowing section (refer to MVP)  
 
-## Borrower Definition
+### Borrower Definition
 
 FOR individual borrower
 WHO wants to monitor the money that they borrowed from other individual.
@@ -23,12 +23,36 @@ The MVP for the borrowing section will mainly be on the loan creation and listin
 
 - Use API, components (Vue) for the client/frontend and mySQL to build the borrow SPA.
 - Pass props to child components and propogate changes back up to parent components.
-- Use API to get data from the database mySQL.
+- Use API to get data from the database mySQL. Express as the middleware.
 - Use state to respond to changes.
 
-## Database Schema
+## Database Schema / API - will change this later : need to find the correct markdown
 
 ![DB Schema](docs/proj1_db_scheme.PNG)
+
+- [API Routes Design](https://github.com/njas17/bor-lend/docs/Bor-Lend_API_Routes_Design.docx)
+
+## Setup
+
+### Dependencies
+
+- Run `npm install` in project directory. This will install server-related dependencies such as `express`.
+- **This is not yet --- `cd client` and run `npm install`. This will install client dependencies (Vue/React).
+
+### Database Prep
+
+- Access the MySQL interface in your terminal by running `mysql -u root -p`
+- Create a new database called borrowlend: `create database borrowlend;`
+- Add a `.env` file to the main folder of this repository containing the MySQL authentication information for MySQL user. For example:
+
+```bash
+  DB_HOST=localhost
+  DB_USER=root
+  DB_NAME=borrowlend
+  DB_PASS=YOURPASSWORD
+```
+
+- Run `npm run migrate` in the main folder of this repository, in a new terminal window. This will create 5 tables of the borrowerlender database with some dummy data.
 
 ## Basic Requirements
 
@@ -62,7 +86,6 @@ The MVP for the borrowing section will mainly be on the loan creation and listin
 
 ## Resources
 
-- [API Routes Design](https://github.com/njas17/bor-lend/docs/Bor-Lend_API_Routes_Design.docx)
 - [Technical Specification](https://xxxx)
 
 ## Notes
