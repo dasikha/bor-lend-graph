@@ -22,7 +22,7 @@ router.get("/categories", (req, res) => {
 
 router.get("/contacts", (req, res) => {
   // Send back the full list of items
-  db("SELECT id, name FROM borrower_lender ORDER BY name ASC;")
+  db("SELECT id, name FROM contacts ORDER BY name ASC;")
     .then(results => {
       res.send(results.data);
     })
