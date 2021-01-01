@@ -19,7 +19,7 @@ con.connect(function(err) {
   console.log("Connected!");
 
   let sql =
-	  "DROP DATABASE IF exists borrowlend ; CREATE DATABASE borrowlend; USE borrowlend; "
+	  "DROP DATABASE IF EXISTS borrowlend ; CREATE DATABASE borrowlend; USE borrowlend; "
     + "CREATE TABLE users (id int NOT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(255) NOT NULL, email varchar(255) NOT NULL, password varchar(50) NOT NULL, threshold_limit FLOAT, threshold_period varchar(10)); "
     + "CREATE TABLE contacts (id int NOT NULL AUTO_INCREMENT PRIMARY KEY, user_id int NOT NULL, name varchar(255) NOT NULL, contact_number varchar(20), email varchar(50), relationship varchar(50), FOREIGN KEY (user_id) REFERENCES users (id)); "
     + "CREATE TABLE category (id int NOT NULL AUTO_INCREMENT PRIMARY KEY, category_name varchar(150) NOT NULL); "
@@ -29,18 +29,6 @@ con.connect(function(err) {
   let sqlInsert = "INSERT INTO users(email,name,password,threshold_limit, threshold_period) VALUES ('Ms. Lovelyz', 'amazing@somehere.com', 'stillunderdev', 1000.00, 'yearly'); "
     + "INSERT INTO contacts(user_id,name,contact_number) VALUES (1, 'Leena', '123-456-333'), (1, 'Mee Fah', '123-000-333'), (1, 'Zila', '123-222-555'); "
     + "INSERT INTO category(category_name) VALUES ('Medical/Healthcare'), ('School/Education'), ('Finance/Debt Payment'), ('Housing'), ('Food'), ('Transportation'), ('Utilities'), ('Insurance'), ('Personal Spending'), ('Recreation/Entertainment'), ('Miscellaneous');";
-
-  // let sqlSp = 
-  // " DELIMITER // "
-  // + "CREATE PROCEDURE `GetLoanInformationByUserId` (IN uid int) "
-  // + "BEGIN"
-  // + " SELECT c.name, c.contact_number, l.initial_amount, l.status, "
-  // + "  SUM(p.amount_paid) AS totalpaid, (l.initial_amount - SUM(p.amount_paid)) AS currentamount "
-  // + "    FROM loan l LEFT JOIN payment p ON l.id = p.loan_id INNER JOIN contacts c ON l.contact_id = c.id "
-  // + "  WHERE l.user_id = uid GROUP BY c.name, c.contact_number, l.initial_amount, l.status; "
-  // + " END "
-  // + "// "
-  // + "DELIMITER ;";
   
   con.query(sql + sqlInsert, function(err, result) {
     if (err) throw err;

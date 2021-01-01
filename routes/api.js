@@ -49,6 +49,7 @@ router.get("/loans/:id", (req, res) => {
 });
 
 //get loan data (summary)
+//type = 'borrow' or 'lend'
 router.get("/loans/summary/:id/:type", (req, res) => {
   // Send back the full list of items
   db("SELECT l.id, l.date, l.remarks, c.name, c.contact_number, l.initial_amount, l.status, "
@@ -56,8 +57,22 @@ router.get("/loans/summary/:id/:type", (req, res) => {
    + "l.initial_amount - SUM(IFNULL(p.amount_paid, 0)) AS currentamount "
    + "FROM loan l LEFT JOIN payment p ON l.id = p.loan_id "
    + "INNER JOIN contacts c ON l.contact_id = c.id WHERE l.user_id = ? AND l.type = ?"
-   + "GROUP BY l.id, l.date, l.remarks, c.name, c.contact_number, l.initial_amount, l.status;", 
-   [req.params.id,req.params.type])
+   + "GROUP BY l.id;",
+    [req.params.id,req.params.type])
+    .then(results => {
+      res.send(results.data);
+    })
+    .catch(err => res.status(500).send(err));
+});
+
+//get threshold status data
+//ignore the threshold period and see if it is feasible without it or not
+//logically we do not want people to accumate loans more than the limit regardless of the period
+//if user want the threshold limited to the threshold period only then the API would be like:
+///threshold/:id/:period (where period will get a value of yearly or mmonthly)
+router.get("/threshold/:id/", (req, res) => {
+  // Send back the full list of items
+  db("select u.threshold_limit, sum(l.initial_amount), sum(ifnull(p.amount_paid,0)), sum(l.initial_amount) - sum(ifnull(p.amount_paid,0)) from users u inner join loan l on u.id = l.user_id inner join payment p on l.id = p.loan_id where u.id = ? and l.status = 'active' group by u.id ;", req.params.id)
     .then(results => {
       res.send(results.data);
     })
