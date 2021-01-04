@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div id="header">
-      In-a-Pinch
-      Welcome {{name}}!
+      <div>In-a-Pinch</div>
+      <div>Welcome {{name}}! </div>
     </div>
-    <loan-page :loantype="loantype" />
+    <loan-page :uid="userId" :loantype="loantype" />
    </div>
 </template>
 
@@ -21,21 +21,17 @@ export default {
       userId: 1, //dummy user
       name: "Lovelyz",  
       loantype: "borrow",
-      contactsList: []      
     };
   },
   methods: {
-    getContacts() {
-      fetch("/api/contacts")
-        .then(response => response.json())
-        .then(data => {
-          this.contactsList = data;
-          console.log("===> ", this.contactsList);
-        });
-    }
+
+    
+  },
+  created () {
+
   },
   mounted () {
-    this.getContacts();
+
 
   }
   

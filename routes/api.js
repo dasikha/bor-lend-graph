@@ -29,9 +29,9 @@ router.get("/categories", (req, res) => {
     .catch(err => res.status(500).send(err));
 });
 
-router.get("/contacts", (req, res) => {
+router.get("/contacts/:id", (req, res) => {
   // Send back the full list of items
-  db("SELECT id, name FROM contacts ORDER BY name ASC;")
+  db("SELECT id, name FROM contacts WHERE user_id = ? ORDER BY name ASC;", req.params.id)
     .then(results => {
       res.send(results.data);
     })
@@ -49,6 +49,7 @@ router.get("/loans/:id", (req, res) => {
 });
 
 //get loan data (summary)
+//id = user id
 //type = 'borrow' or 'lend'
 router.get("/loans/summary/:id/:type", (req, res) => {
   // Send back the full list of items
