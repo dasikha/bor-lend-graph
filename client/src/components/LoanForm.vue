@@ -35,7 +35,7 @@
       <label>Remarks</label>
       <textarea v-model="loaninfo.remarks" rows="7"></textarea>
       <input type="submit" value="Submit" @click="handleAdd" />
-      <button type="reset" value="Reset">Reset</button>
+      <button type="reset" value="Reset"></button>
     </form>
   </div>
 </template>
@@ -93,3 +93,5 @@ export default {
 </script>
 
 <style>
+
+</style>
