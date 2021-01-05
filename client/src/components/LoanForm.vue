@@ -9,7 +9,7 @@
     </div>
     <form>
       <label>Contact Name:</label>
-      <select v-model="loaninfo.contact_id">
+      <select v-model.number="loaninfo.contact_id">
         <option disabled selected value=0>Please select one</option>
         <option
           v-for="contact in contacts"
@@ -20,9 +20,9 @@
         </option>
       </select>
       <label>Amount:</label>
-      $<input v-model="loaninfo.initial_amount" type="text" />
+      $<input v-model.number="loaninfo.initial_amount" type="number" />
       <label>Category:</label>
-      <select v-model="loaninfo.category_id">
+      <select v-model.number="loaninfo.category_id">
         <option disabled selected value=0>Please select one</option>
         <option
           v-for="category in categories"
@@ -68,10 +68,7 @@ export default {
         e.preventDefault();
         
         if (this.validateForm()) {
-            //console.log("this should be ok - no error")
             this.loaninfo.date = this.getLocaleDate();
-            //console.log(this.loaninfo.date);
-            //console.log("the data:", this.loaninfo);
             this.$emit("addLoan", this.loaninfo);
         } 
     },
@@ -84,14 +81,14 @@ export default {
         this.errors = [];
 
         if (this.loaninfo.contact_id === 0) this.errors.push("Contact name required.");
-
         if (this.loaninfo.category_id === 0) this.errors.push('Category required.');
- 
-        if (this.loaninfo.initial_amount < 1 || typeof(this.loaninfo.initial_amount) !=="number") 
-            this.errors.push('Amount must be more than $0.');
+        if (this.loaninfo.initial_amount < 1) this.errors.push('Amount must be more than $0.');
+        if (typeof(this.loaninfo.initial_amount) !== "number") this.errors.push('Amount entered in not valid. It should be in number.');
 
         if (!this.errors.length) return true;
     }
   }
 };
 </script>
+
+<style>

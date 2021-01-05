@@ -10,14 +10,18 @@
       Pending: Loan list. 
       First phase will be solely for Loan type = {{ loantype }}
     </p>
+    
+    <loan-list :loans="loans" />
+    
   </div>
 </template>
 
 <script>
 import LoanForm from './LoanForm.vue';
+import LoanList from './LoanList.vue';
 
 export default {
-  components: { LoanForm },
+  components: { LoanForm, LoanList },
   name: 'LoanPage',
   props: {
     uid: Number,
@@ -79,3 +83,5 @@ export default {
   }
 }
 </script>
+
+<syle></syle>
