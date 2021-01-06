@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="header">
-      <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar toggleable="lg" type="dark">
         <b-navbar-brand href="#">In-a-Pinch</b-navbar-brand>
     
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -65,8 +65,14 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
-
+.navbar {
+ background-color: #484b8a !important;
+ box-shadow: 0px 2px 3px gray;
+ border-bottom: 1px solid darkblue;
+}
+.page-header {
+  background-color: #93cdd1;
+}
 </style>

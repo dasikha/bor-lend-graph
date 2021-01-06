@@ -1,116 +1,115 @@
 <template>
   <div class="loanpage">
-    <h1>Add Loan ({{ loantype }})</h1>
-    <loan-form @addLoan="addNewLoan"
-      :uid="uid" 
-      :contacts="contacts" 
-      :categories="categories" 
-      :loantype="loantype" />
-    <p>
-      Pending: Loan list. 
-      First phase will be solely for Loan type = {{ loantype }}
-    </p>
-    
-    <loan-list :loans="loans" @deleteLoan="deleteLoanInfo" @addPayment="addNewPayment" />
-    
+    <b-container fluid>
+      <b-row>
+        <b-col>
+          <h5>I'm {{ loantype }}ing...</h5>
+          <loan-form @addLoan="addNewLoan" :uid="uid" :contacts="contacts" :categories="categories"
+            :loantype="loantype" />
+          <loan-list :loans="loans" @deleteLoan="deleteLoanInfo" @addPayment="addNewPayment" />
+          <test-form />
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
-import LoanForm from './LoanForm.vue';
-import LoanList from './LoanList.vue';
+  import LoanForm from './LoanForm.vue';
+  import LoanList from './LoanList.vue';
+  import TestForm from './TestForm.vue';
 
-export default {
-  components: { LoanForm, LoanList },
-  name: 'LoanPage',
-  props: {
-    uid: Number,
-    loantype: String, 
-  },
-  data () {
-    return {
-      categories: [],
-      contacts: [],      
-      loans:[]
-    };
-  },
-  methods: {
-    getCategories() {
-      fetch("/api/categories")
-        .then(response => response.json())
-        .then(data => {
-          this.categories = data;
-        });
+  export default {
+    components: { LoanForm, LoanList, TestForm },
+    name: 'LoanPage',
+    props: {
+      uid: Number,
+      loantype: String,
     },
-    getContacts(uid) {
-      fetch("/api/contacts/" + uid)
-        .then(response => response.json())
-        .then(data => this.contacts = data);
+    data() {
+      return {
+        categories: [],
+        contacts: [],
+        loans: []
+      };
     },
-    getLoansSummary(id, type) {
+    methods: {
+      getCategories() {
+        fetch("/api/categories")
+          .then(response => response.json())
+          .then(data => {
+            this.categories = data;
+          });
+      },
+      getContacts(uid) {
+        fetch("/api/contacts/" + uid)
+          .then(response => response.json())
+          .then(data => this.contacts = data);
+      },
+      getLoansSummary(id, type) {
         fetch("/api/loans/summary/" + id + "/" + type)
-            .then(response => response.json())
-            .then(data => this.loans = data);
-    },
-    addNewLoan(data) {
-      fetch("/api/loans", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        response.json();
-        this.getLoansSummary(this.uid, this.loantype);
-      })
-      .catch(error => {
-        console.error("Error in add: ", error);
-      });
-    },
-    deleteLoanInfo(loanId) {
-      fetch("/api/loans/" + loanId, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
+          .then(response => response.json())
+          .then(data => this.loans = data);
+      },
+      addNewLoan(data) {
+        fetch("/api/loans", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+          .then(response => {
+            response.json();
+            this.getLoansSummary(this.uid, this.loantype);
+          })
+          .catch(error => {
+            console.error("Error in add: ", error);
+          });
+      },
+      deleteLoanInfo(loanId) {
+        fetch("/api/loans/" + loanId, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then(response => {
+            response.json();
+            this.getLoansSummary(this.uid, this.loantype);
+          })
+          .catch(error => {
+            console.error("Error in delete: ", error);
+          });
+      },
+      addNewPayment(data) {
+        fetch("/api/payments", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+          .then(response => {
+            response.json();
+            this.getLoansSummary(this.uid, this.loantype);
+          })
+          .catch(error => {
+            console.error("Error in add: ", error);
+          });
       }
-    })
-      .then(response => {
-        response.json();
-        this.getLoansSummary(this.uid, this.loantype);
-      })
-      .catch(error => {
-        console.error("Error in delete: ", error);
-      });
     },
-    addNewPayment(data) {
-      fetch("/api/payments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        response.json();
-        this.getLoansSummary(this.uid, this.loantype);
-      })
-      .catch(error => {
-        console.error("Error in add: ", error);
-      });
-    }
-  },
-  created () {
-    this.getCategories();
-    this.getContacts(this.uid);
-    this.getLoansSummary(this.uid, this.loantype);
-  },
-  mounted () {
-    // this.getCategories();
-    // this.getContacts();
+    created() {
+      this.getCategories();
+      this.getContacts(this.uid);
+      this.getLoansSummary(this.uid, this.loantype);
+    },
+    mounted() {
+      // this.getCategories();
+      // this.getContacts();
 
+    }
   }
-}
 </script>
 
 <syle></syle>
