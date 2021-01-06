@@ -8,21 +8,22 @@
     <b-modal id="modal-pay-loan" title="Insert Payment Information" 
       ok-title="Add"
       ref="modal"
-      @show="resetPayModal"
       @hidden="resetPayModal"
+      @show="setModalPay"
       @ok="handleAddPaymt"
-    >
-      
-      <form ref="form" @submit.stop.prevent="handleSubmit">
+    >      
+      <form ref="form" @submit.stop.prevent="handleAddPaymt">
         <div class="form-group">
-          <label for="amountPaidInput">Amount Paid</label>
-          <input type="number" class="form-control" id="amountPaidInput" aria-describedby="amountHelp">
-          <small id="amountHelp" class="form-text text-muted">You can put any amount.</small>
+          <div>For: {{ selectedLoanInfo.name }} </div>
+          <label for="datePaidInput">Date Paid:</label>
+          <b-form-datepicker v-model="paymentInputs.date" id="dateInput" class="mb-2"></b-form-datepicker>
         </div>
 
         <div class="form-group">
-          <label for="datePaidInput">Date Paid:</label>
-          <b-form-datepicker id="dateInput" class="mb-2"></b-form-datepicker>
+          <label for="amountPaidInput">Amount Paid:</label>
+          <input type="number" class="form-control" v-model="paymentInputs.amount_paid" id="amountPaidInput" aria-describedby="amountHelp">
+          <small id="amountHelp" class="form-text text-muted">The value in the Amount Paid, is the unpaid balance. 
+            You can put any amount if you're not paying full. </small>          
         </div>
 
         <!-- <b-form-group
@@ -82,7 +83,7 @@
 
       <b-button v-b-modal.modal-delete-loan  @click="selectedLoan = loan.id">Delete</b-button>
       <b-button v-b-modal.modal-display-info @click="handleDisplay(loan)">Details</b-button>
-      <b-button v-b-modal.modal-pay-loan @click="selectedLoan = loan.id">Update Payment</b-button>
+      <b-button v-b-modal.modal-pay-loan @click="setSelected(loan)">Update Payment</b-button>
     </div>
   </div>
 </template>
@@ -97,15 +98,12 @@
     },
     data() {
       return {
-        // modalDeleteShow: false,
-        // modalPayShow: false,
-        // modalDisplayShow: false,
         selectedLoan: 0,
         selectedLoanInfo: [],
         payments: [],
-        paymentInfo: {
+        paymentInputs: {
           loan_id: 0,
-          amount_paid: 0,
+          amount_paid: null,
           date: null
         }
       }
@@ -120,10 +118,12 @@
           .then(response => response.json())
           .then(data => this.payments = data);
       },
-      handleDisplay(loan) {
-        this.modalDisplayShow = !this.modalDisplayShow;
+      setSelected(loan) {
         this.selectedLoan = loan.id;
         this.selectedLoanInfo = loan;
+      },
+      handleDisplay(loan) {
+        this.setSelected(loan);
         this.getPayments();
       },
       resetData() {
@@ -131,11 +131,23 @@
         this.selectedLoan = 0;
         this.selectedLoanInfo = [];
       },
-      handleAddPaymt(){
-
+      handleAddPaymt() {
+        this.paymentInputs.date += " 00:00:00";
+        //console.log(this.paymentInputs);
+        this.$emit("addPayment", this.paymentInputs);
+      },
+      setModalPay() {
+        this.paymentInputs.loan_id = this.selectedLoan;
+        this.paymentInputs.amount_paid = this.selectedLoanInfo.currentamount;
       },
       resetPayModal() {
-
+        this.selectedLoan = 0;
+        this.selectedLoanInfo = [];
+        this.paymentInputs = {
+          loan_id: 0,
+          amount_paid: null,
+          date: null
+        }
       }
     }
   }

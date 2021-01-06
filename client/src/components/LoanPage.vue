@@ -11,7 +11,7 @@
       First phase will be solely for Loan type = {{ loantype }}
     </p>
     
-    <loan-list :loans="loans" @deleteLoan="deleteLoanInfo" />
+    <loan-list :loans="loans" @deleteLoan="deleteLoanInfo" @addPayment="addNewPayment" />
     
   </div>
 </template>
@@ -81,6 +81,22 @@ export default {
       })
       .catch(error => {
         console.error("Error in delete: ", error);
+      });
+    },
+    addNewPayment(data) {
+      fetch("/api/payments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        response.json();
+        this.getLoansSummary(this.uid, this.loantype);
+      })
+      .catch(error => {
+        console.error("Error in add: ", error);
       });
     }
   },
