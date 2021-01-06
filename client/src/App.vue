@@ -1,8 +1,30 @@
 <template>
   <div id="app">
     <div id="header">
-      <div>In-a-Pinch</div>
-      <div>Welcome {{name}}! </div>
+      <b-navbar toggleable="lg" type="dark" variant="info">
+        <b-navbar-brand href="#">In-a-Pinch</b-navbar-brand>
+    
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+    
+        <b-collapse id="nav-collapse" is-nav>
+          <b-navbar-nav>
+            <b-nav-item href="#">Borrow</b-nav-item>
+            <b-nav-item href="#" disabled>Lend</b-nav-item>
+          </b-navbar-nav>
+
+          <!-- Right aligned nav items -->
+          <b-navbar-nav class="ml-auto">
+            <b-nav-item-dropdown right>
+              <!-- Using 'button-content' slot -->
+              <template #button-content>
+                <em>Welcome {{name}}!</em>
+              </template>
+              <b-dropdown-item href="#">Settings</b-dropdown-item>
+              <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            </b-nav-item-dropdown>
+          </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
     </div>
     <loan-page :uid="userId" :loantype="loantype" />
    </div>
@@ -45,9 +67,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
-.header {
-  background-color: #7fffd4;
-}
+
 </style>

@@ -18,7 +18,7 @@ The overall project is to assist user to monitor the borrowing and lending activ
 FOR individual borrower
 WHO wants to monitor the money that they borrowed from other individual.
 THE application IS a web-based system
-THAT helps the borrower to keep track the amount they borrowed and have control over their borrowing habits
+THAT helps the borrower to keep track the amount they borrowed and have overview over their borrowing limit
 UNLIKE jotting down on paper or some files
 THIS APPLICATION keeps the history of the borrowing as well the payment made without the user having problem to remember how much was borrowed or paid.
 
@@ -45,7 +45,7 @@ The MVP for the borrowing section will mainly be on the loan creation and listin
 ### Dependencies
 
 * Run `npm install` in project directory. This will install server-related dependencies such as `express`.
-* **This is not yet --- `cd client` and run `npm install`. This will install client dependencies (Vue/React).
+* `cd client` and run `npm install`. This will install client dependencies (Vue).
 
 ### Database Prep
 
