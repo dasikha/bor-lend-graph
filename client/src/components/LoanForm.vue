@@ -7,7 +7,7 @@
             <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
         </ul>
     </div>
-    <form>
+    <b-form >
       <label>Contact Name:</label>
       <select v-model.number="loaninfo.contact_id">
         <option disabled selected value=0>Please select one</option>
@@ -34,9 +34,9 @@
       </select>
       <label>Remarks</label>
       <textarea v-model="loaninfo.remarks" rows="7"></textarea>
-      <input type="submit" value="Submit" @click="handleAdd" />
-      <button type="reset">Reset</button>
-    </form>
+      <b-button type="submit" @click="handleAdd" variant="outline-primary">Submit</b-button> 
+      <b-button type="reset" variant="outline-primary">Reset</b-button>
+    </b-form>
   </div>
 </template>
 

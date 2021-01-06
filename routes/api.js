@@ -54,10 +54,12 @@ router.get("/loans/:id", (req, res) => {
 router.get("/loans/summary/:id/:type", (req, res) => {
   // Send back the full list of items
   db("SELECT l.id, l.date, l.remarks, c.name, c.contact_number, l.initial_amount, l.status, "
-   + "SUM(IFNULL(p.amount_paid,0)) AS totalpaid, "
+   + "cat.category_name, SUM(IFNULL(p.amount_paid,0)) AS totalpaid, "
    + "l.initial_amount - SUM(IFNULL(p.amount_paid, 0)) AS currentamount "
    + "FROM loan l LEFT JOIN payment p ON l.id = p.loan_id "
-   + "INNER JOIN contacts c ON l.contact_id = c.id WHERE l.user_id = ? AND l.type = ?"
+   + "INNER JOIN contacts c ON l.contact_id = c.id "
+   + "LEFT JOIN category cat ON l.category_id = cat.id "
+   + "WHERE l.user_id = ? AND l.type = ?"
    + "GROUP BY l.id;",
     [req.params.id,req.params.type])
     .then(results => {
@@ -94,6 +96,16 @@ router.post("/loans", function(req, res, next) {
 router.post("/payments", function(req, res, next) {
   //your code here
   db("INSERT INTO payment SET ?;", req.body)
+    .then(results => {
+      res.send(results.data);
+    })
+    .catch(err => res.status(500).send(err));
+}); 
+
+//get all paid info of a loan
+router.get("/payments/:id", function(req, res, next) {
+  //your code here
+  db("SELECT date as date_entered, amount_paid FROM payment WHERE loan_id = ?;", req.params.id)
     .then(results => {
       res.send(results.data);
     })
