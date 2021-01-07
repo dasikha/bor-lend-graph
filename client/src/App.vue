@@ -66,6 +66,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  background-color: #dcdcd7;
 }
 .navbar {
  background-color: #484b8a !important;
