@@ -22,7 +22,7 @@ router.get("/users/:id", (req, res) => {
 
 router.get("/categories", (req, res) => {
   // Send back the full list of items
-  db("SELECT * FROM category ORDER BY category_name ASC;")
+  db("SELECT category_name as text, id as value FROM category ORDER BY category_name ASC;")
     .then(results => {
       res.send(results.data);
     })
@@ -31,7 +31,7 @@ router.get("/categories", (req, res) => {
 
 router.get("/contacts/:id", (req, res) => {
   // Send back the full list of items
-  db("SELECT id, name FROM contacts WHERE user_id = ? ORDER BY name ASC;", req.params.id)
+  db("SELECT name as text, id as value FROM contacts WHERE user_id = ? ORDER BY name ASC;", req.params.id)
     .then(results => {
       res.send(results.data);
     })

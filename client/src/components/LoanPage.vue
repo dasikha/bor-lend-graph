@@ -3,11 +3,11 @@
     <b-container fluid>
       <b-row>
         <b-col>
-          <h5>I'm {{ loantype }}ing...</h5>
+          <h5></h5>
           <loan-form @addLoan="addNewLoan" :uid="uid" :contacts="contacts" :categories="categories"
             :loantype="loantype" />
           <loan-list :loans="loans" @deleteLoan="deleteLoanInfo" @addPayment="addNewPayment" />
-          <test-form />
+          <test-table :loans="loans" />
         </b-col>
       </b-row>
     </b-container>
@@ -17,10 +17,11 @@
 <script>
   import LoanForm from './LoanForm.vue';
   import LoanList from './LoanList.vue';
-  import TestForm from './TestForm.vue';
+  import TestTable from './TestTable.vue';
+  //import TestForm from './TestForm.vue';
 
   export default {
-    components: { LoanForm, LoanList, TestForm },
+    components: { LoanForm, LoanList, TestTable },
     name: 'LoanPage',
     props: {
       uid: Number,
@@ -39,12 +40,16 @@
           .then(response => response.json())
           .then(data => {
             this.categories = data;
+            this.categories.unshift({ text: 'Select One', value: null });
           });
       },
       getContacts(uid) {
         fetch("/api/contacts/" + uid)
           .then(response => response.json())
-          .then(data => this.contacts = data);
+          .then(data => {
+            this.contacts = data;
+            this.contacts.unshift({ text: 'Select One', value: null });
+          });
       },
       getLoansSummary(id, type) {
         fetch("/api/loans/summary/" + id + "/" + type)

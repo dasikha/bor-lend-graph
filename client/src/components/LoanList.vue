@@ -4,7 +4,6 @@
       This will delete all the records for this loan entry.
       Are you sure?
     </b-modal>
-
     <b-modal id="modal-pay-loan" title="Insert Payment Information" 
       ok-title="Add"
       ref="modal"
@@ -25,25 +24,9 @@
           <small id="amountHelp" class="form-text text-muted">The value in the Amount Paid, is the unpaid balance. 
             You can put any amount if you're not paying full. </small>          
         </div>
-
-        <!-- <b-form-group
-          label="Amount Paid"
-          label-for="amount-input"
-          invalid-feedback="Amount is required"
-          :state="amountState"
-        >
-          <b-form-input
-            id="amount-input"
-            v-model="amountPaid"
-            :state="amountState"
-            required
-          ></b-form-input>
-        </b-form-group> -->
-
-        
+       
       </form>      
     </b-modal>
-
     <b-modal id="modal-display-info" title="Borrow Details" scrollable ok-only @hidden="resetData" @ok="resetData">
       <b-container fluid>
         <b-row>
@@ -85,6 +68,9 @@
       <b-button v-b-modal.modal-display-info @click="handleDisplay(loan)">Details</b-button>
       <b-button v-b-modal.modal-pay-loan @click="setSelected(loan)">Update Payment</b-button>
     </div>
+
+    
+
   </div>
 </template>
 
