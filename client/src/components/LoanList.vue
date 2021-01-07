@@ -53,24 +53,20 @@
         </b-row>
       </b-container>
     </b-modal>
-    
-    <div v-for="loan in loans" :key="loan.id">
-      {{ loan.id }}
-      {{ loan.date }}
-      {{ loan.remarks }}
-      {{ loan.name }} - {{ loan.contact_number }}
-      {{ loan.initial_amount }}
-      {{ loan.status }}
-      {{ loan.totalpaid }}
-      {{ loan.currentamount }}
 
-      <b-button v-b-modal.modal-delete-loan  @click="selectedLoan = loan.id">Delete</b-button>
-      <b-button v-b-modal.modal-display-info @click="handleDisplay(loan)">Details</b-button>
-      <b-button v-b-modal.modal-pay-loan @click="setSelected(loan)">Update Payment</b-button>
-    </div>
+    <b-table striped small :fields="fields" :items="loans" responsive="sm" >
+      <!-- A virtual custom action/buttons column -->
+      <template #cell(actions)="row">
+          <b-button size="sm" class="mr-1" v-b-modal.modal-delete-loan  @click="selectedLoan = row.item.id ">Delete</b-button>
+          <b-button size="sm" class="mr-1" v-b-modal.modal-pay-loan @click="setSelected(row.item)">Insert Payment Info</b-button>          
+          <b-button size="sm" class="mr-1" v-b-modal.modal-display-info @click="handleDisplay(row.item)">Details</b-button>
+      </template>
 
-    
-
+      <!-- Optional default data cell scoped slot -->
+      <template #cell()="data">
+        <i>{{ data.value }}</i>
+      </template>
+    </b-table>
   </div>
 </template>
 
@@ -91,7 +87,23 @@
           loan_id: 0,
           amount_paid: null,
           date: null
-        }
+        },
+        fields: [
+          // A regular column
+          'date',          
+          // A column that needs custom formatting
+          { key: 'name', label: 'Lender' },
+          // A column that needs custom formatting
+          { key: 'contact_number', label: 'Contact #' },
+          // A regular column
+          { key: 'initial_amount', label: 'Amount Borrowed' },'',
+          // A regular column
+          { key: 'totalpaid', label: 'Total Paid' },
+          // A regular column
+          { key: 'currentamount', label: 'Current Unpaid' },'',
+          // A virtual column for button
+          { key: 'actions', label: 'Actions' }
+        ]
       }
     },
     methods: {
@@ -109,6 +121,7 @@
         this.selectedLoanInfo = loan;
       },
       handleDisplay(loan) {
+        console.log(loan);
         this.setSelected(loan);
         this.getPayments();
       },

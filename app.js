@@ -1,13 +1,13 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var cors = require("cors");
+let createError = require("http-errors");
+let express = require("express");
+let path = require("path");
+let cookieParser = require("cookie-parser");
+let logger = require("morgan");
+let cors = require("cors");
 
-var apiRouter = require("./routes/api");
+let apiRouter = require("./routes/api");
 
-var app = express();
+let app = express();
 
 app.use(cors());
 app.use(logger("dev"));
@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, "client/build")));
+//app.use(express.static(path.join(__dirname, "client/build")));
 
 app.get("/", function(req, res, next) {
   res.send("Access the API at path /api");
@@ -25,9 +25,9 @@ app.get("/", function(req, res, next) {
 app.use("/api", apiRouter);
 
 // Anything that doesn't match the above, send back index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/client/build/index.html"));
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

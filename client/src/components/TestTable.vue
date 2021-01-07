@@ -11,8 +11,8 @@
         </template>
   
         <!-- A custom formatted column -->
-        <template #cell(contact_numbername)="data">
-          <b class="text-info">{{ data.name }}</b>, <b>{{ data.contact_number }}</b>
+        <template #cell(initial_amounttotalpaid)="data">
+          <b class="text-info">{{ data.initial_amount }}</b>, <b>{{ data.totalpaid }}</b>
         </template>
     
         <!-- A virtual custom action/buttons column -->
@@ -42,7 +42,7 @@
                 // A virtual column that doesn't exist in items
                 'index',
                 // A column that needs custom formatting
-                { key: 'contact_numbername', label: 'Contact Information' },
+                { key: 'contact_number', label: 'Contact Information' },
                 // A regular column
                 'date',
                 // A regular column
@@ -50,7 +50,7 @@
                 // A regular column
                 'totalpaid',
                 // A regular column
-                'currentamount',
+                { key: 'initial_amounttotalpaid', label: 'Current Unpaid' },
                 // A virtual column for button
                 { key: 'id', label: 'Action' }
             ],

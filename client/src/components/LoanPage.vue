@@ -7,7 +7,7 @@
           <loan-form @addLoan="addNewLoan" :uid="uid" :contacts="contacts" :categories="categories"
             :loantype="loantype" />
           <loan-list :loans="loans" @deleteLoan="deleteLoanInfo" @addPayment="addNewPayment" />
-          <test-table :loans="loans" />
+
         </b-col>
       </b-row>
     </b-container>
@@ -17,11 +17,11 @@
 <script>
   import LoanForm from './LoanForm.vue';
   import LoanList from './LoanList.vue';
-  import TestTable from './TestTable.vue';
+  //import TestTable from './TestTable.vue';
   //import TestForm from './TestForm.vue';
 
   export default {
-    components: { LoanForm, LoanList, TestTable },
+    components: { LoanForm, LoanList },
     name: 'LoanPage',
     props: {
       uid: Number,
