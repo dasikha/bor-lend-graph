@@ -16,8 +16,6 @@
 <script>
   import LoanForm from './LoanForm.vue';
   import LoanList from './LoanList.vue';
-  //import FormTable from './FormTable.vue';
-  //import TestForm from './TestForm.vue';
 
   export default {
     components: { LoanForm, LoanList },
