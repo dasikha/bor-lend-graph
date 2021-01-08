@@ -117,10 +117,7 @@
           'status',
           // A virtual column for button
           { key: 'actions', label: 'Actions' }
-        ],
-        paystate: null,
-        amtPayState: null
-
+        ]
       }
     },
     methods: {
