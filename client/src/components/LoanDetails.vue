@@ -2,17 +2,17 @@
     <div>
         <b-container fluid>
             <b-row>
-                <b-col>Lender: {{ selectedLoanInfo.name }}</b-col>
-                <b-col>Date Entered: {{ selectedLoanInfo.date }}</b-col>
+                <b-col>Lender: {{ loaninfo.name }}</b-col>
+                <b-col>Date Entered: {{ loaninfo.date }}</b-col>
             </b-row>
             <b-row>
-                <b-col>Amount Borrowed: {{ selectedLoanInfo.inital_amount }}</b-col>
-                <b-col>Category: {{ selectedLoanInfo.category_name }}</b-col>
+                <b-col>Amount Borrowed: {{ loaninfo.inital_amount }}</b-col>
+                <b-col>Category: {{ loaninfo.category_name }}</b-col>
             </b-row>
             <b-row>
                 <b-col>
                     <div>Remarks:</div>
-                    <div>{{ selectedLoanInfo.remarks }}</div>
+                    <div>{{ loaninfo.remarks }}</div>
                 </b-col>
             </b-row>
             <b-row>
@@ -28,10 +28,11 @@
 </template>
 
 <script>
+    
     export default {
         name: "LoanDetails",
         props: {
-            selectedLoanInfo: Array,
+            loaninfo: Object,
             payments: Array
         }
     }

@@ -27,12 +27,16 @@
         </b-modal>
 
         <b-modal id="modal-display-info" title="Borrow Details" scrollable ok-only @hidden="resetData" @ok="resetData">
-          <loan-details :selectedLoanInfo="selectedLoanInfo" :payments="payments" />
+          <loan-details :loaninfo="selectedLoanInfo" :payments="payments" @shortDate="getLocaleDate" />
         </b-modal>
         
         <div class="main-list">
           <b-table default striped bordered small stacked="sm" table-variant="light" :fields="fields" :items="loans"
             responsive="md">
+            <template #cell(date)="data">
+              {{ getLocaleDate(data.value) }}
+            </template>
+
             <!-- A virtual custom action/buttons column -->
             <template #cell(actions)="row">
               <b-button-group>
@@ -73,7 +77,7 @@
     data() {
       return {
         selectedLoan: 0,
-        selectedLoanInfo: [],
+        selectedLoanInfo: {},
         payments: [],
         paymentInputs: {
           loan_id: 0,
@@ -121,7 +125,7 @@
       resetData() {
         this.payments = [];
         this.selectedLoan = 0;
-        this.selectedLoanInfo = [];
+        this.selectedLoanInfo = {};
       },
       handleAddPaymt() {
         this.paymentInputs.date += " 00:00:00";
@@ -135,12 +139,16 @@
       },
       resetPayModal() {
         this.selectedLoan = 0;
-        this.selectedLoanInfo = [];
+        this.selectedLoanInfo = {};
         this.paymentInputs = {
           loan_id: 0,
           amount_paid: null,
           date: null
         }
+      },
+      getLocaleDate(date) {
+        let d = new Date(date);
+        return d.toLocaleDateString();
       }
     }
   }
