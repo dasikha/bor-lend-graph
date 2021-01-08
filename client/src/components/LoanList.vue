@@ -7,23 +7,36 @@
           Are you sure?
         </b-modal>
         
-        <b-modal id="modal-pay-loan" title="Insert Payment Information" ok-title="Add" ref="modal"
-          @hidden="resetPayModal" @show="setModalPay" @ok="handleAddPaymt">
-          <form ref="form" @submit.stop.prevent="handleAddPaymt">
-            <div class="form-group">
-              <div>For: {{ selectedLoanInfo.name }} </div>
-              <label for="datePaidInput">Date Paid:</label>
-              <b-form-datepicker v-model="paymentInputs.date" id="dateInput" class="mb-2"></b-form-datepicker>
-            </div>
-
-            <div class="form-group">
-              <label for="amountPaidInput">Amount Paid:</label>
-              <input type="number" class="form-control" v-model="paymentInputs.amount_paid" id="amountPaidInput"
-                aria-describedby="amountHelp">
-              <small id="amountHelp" class="form-text text-muted">The value in the Amount Paid, is the unpaid balance.
-                You can put any amount if you're not paying full. </small>
-            </div>
-          </form>
+        <b-modal id="modal-pay-loan" title="Insert Payment Information"  hide-footer ref="modal"
+          @hidden="resetPayModal" @show="setModalPay">
+          <div>Paid to: {{ selectedLoanInfo.name }} </div>                   
+            <b-form @submit="handleAddPaymt">
+              <b-form-group
+                label="Date Payment Made:" label-for="datePaidInput"
+              >
+                <b-form-input
+                  type="date"
+                  id="datePaidInput"
+                  v-model="paymentInputs.date"
+                  required
+                ></b-form-input>
+              </b-form-group>
+        
+              <b-form-group label="Amount Paid:" label-for="amountPaidInput" description="The value in the Amount Paid, is the unpaid balance.
+              You can put any amount if you're not paying full.">
+                <b-form-input
+                  type="number" step="any" min=1
+                  id="amountPaidInput"
+                  v-model.number="paymentInputs.amount_paid"
+                  placeholder="Enter amount"
+                  required 
+                ></b-form-input>
+              </b-form-group> 
+              <div class="custom-modal-footer">
+                <button class="btn btn-secondary mr-2" @click="$bvModal.hide('modal-pay-loan')" type="reset">Close</button>        
+                <button class="btn btn-primary ml-2" type="submit">Submit form</button>
+              </div>
+          </b-form>
         </b-modal>
 
         <b-modal id="modal-display-info" title="Borrow Details" scrollable ok-only @hidden="resetData" @ok="resetData">
@@ -76,6 +89,10 @@
     },
     data() {
       return {
+        form: {
+          email: '',
+          name: ''
+        },
         selectedLoan: 0,
         selectedLoanInfo: {},
         payments: [],
@@ -100,7 +117,10 @@
           'status',
           // A virtual column for button
           { key: 'actions', label: 'Actions' }
-        ]
+        ],
+        paystate: null,
+        amtPayState: null
+
       }
     },
     methods: {
@@ -128,10 +148,15 @@
         this.selectedLoanInfo = {};
       },
       handleAddPaymt() {
+        let loanStatus = null;
+
+        event.preventDefault();
         this.paymentInputs.date += " 00:00:00";
         //console.log(this.paymentInputs);
-        this.$emit("addPayment", this.paymentInputs);
+        if (this.paymentInputs.amount_paid >= this.selectedLoanInfo.currentamount) loanStatus = "done";
+        this.$emit("addPayment", this.paymentInputs, loanStatus);
         this.resetData();
+        this.$bvModal.hide('modal-pay-loan')
       },
       setModalPay() {
         this.paymentInputs.loan_id = this.selectedLoan;
@@ -176,5 +201,11 @@
     background-color: #93cdd1;
     border-color: #93cdd1;
     /* background-color: #a7d0b8; */
+  }
+  .custom-modal-footer {
+    text-align: right;
+    border-top: lightgray solid 1px;
+    margin-top: 10px;
+    padding-top: 10px;
   }
 </style>

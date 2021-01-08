@@ -35,7 +35,7 @@
               <b-col lg="12">
                 <b-button type="submit" variant="primary">Submit</b-button>
                 <b-button type="reset" variant="secondary">Reset</b-button>
-                <b-alert id="insertalert" v-if="show" show variant="success" dismissible fade>
+                <b-alert id="insertalert" v-if="show" show variant="success" small dismissible fade>
                   <strong>Success</strong>. The borrow information has been added. Thank you. 
                 </b-alert>
               </b-col>
@@ -78,12 +78,10 @@
         this.form.date = this.getLocaleDate();
         this.$emit("addLoan", this.form);
         this.show = true;
-        console.log(this.show);
         this.onReset(event);
-        console.log(this.form.initial_amount);
       },
       onReset(event) {
-        event.preventDefault()
+        event.preventDefault();
         // Reset our form values
         this.form.contact_id = null;
         this.form.initial_amount = null;

@@ -38,6 +38,9 @@
           .then(data => {
             this.categories = data;
             this.categories.unshift({ text: 'Select One', value: null });
+          })
+          .catch(error => {
+            console.error("Error in get categories: ", error);
           });
       },
       getContacts(uid) {
@@ -46,12 +49,18 @@
           .then(data => {
             this.contacts = data;
             this.contacts.unshift({ text: 'Select One', value: null });
+          })
+          .catch(error => {
+            console.error("Error in get contacts: ", error);
           });
       },
       getLoansSummary(id, type) {
         fetch("/api/loans/summary/" + id + "/" + type)
           .then(response => response.json())
-          .then(data => this.loans = data);
+          .then(data => this.loans = data)
+          .catch(error => {
+            console.error("Error in get loan: ", error);
+          });
       },
       addNewLoan(data) {
         fetch("/api/loans", {
@@ -66,7 +75,7 @@
             this.getLoansSummary(this.uid, this.loantype);
           })
           .catch(error => {
-            console.error("Error in add: ", error);
+            console.error("Error in add loan: ", error);
           });
       },
       deleteLoanInfo(loanId) {
@@ -81,10 +90,11 @@
             this.getLoansSummary(this.uid, this.loantype);
           })
           .catch(error => {
-            console.error("Error in delete: ", error);
+            console.error("Error in delete loan-payment: ", error);
           });
       },
-      addNewPayment(data) {
+      addNewPayment(data, lstatus = null) {
+        const loanid = data.loan_id;
         fetch("/api/payments", {
           method: "POST",
           headers: {
@@ -94,12 +104,28 @@
         })
           .then(response => {
             response.json();
-            this.getLoansSummary(this.uid, this.loantype);
+            (lstatus) ? this.updateLoanStatus(loanid, lstatus) : this.getLoansSummary(this.uid, this.loantype);
           })
           .catch(error => {
-            console.error("Error in add: ", error);
+            console.error("Error in add payment: ", error);
           });
-      }
+      },
+      updateLoanStatus(lid, lstatus) {
+        fetch(`/api/loans/${lid}/${lstatus}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ id: lid, status: lstatus })
+        }).then(res => {
+          // Continue fetch request here
+          res.json();
+          this.getLoansSummary(this.uid, this.loantype);
+        })
+        .catch(error => {
+            console.error("Error in update loan: ", error);
+        });
+      }      
     },
     created() {
       this.getCategories();
