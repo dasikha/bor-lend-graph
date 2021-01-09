@@ -35,14 +35,14 @@
           </b-modal>
 
           <div class="main-list">
-            <b-table default striped stacked="sm" :fields="fields"
+            <b-table default small striped stacked="sm" :fields="fields"
               :items="loans" responsive="md">
               <template #cell(date)="data">
                 {{ getLocaleDate(data.value) }}
               </template>
 
               <template #cell(status)="data">
-                <p class="text-capitalize"><b-badge :variant="[data.value === 'done' ? 'success' : 'secondary']"> {{ data.value }}</b-badge></p>
+                <p class="text-capitalize"><span :class="['badge', data.value === 'done' ? 'badge-success' : 'badge-secondary']"> {{ data.value }}</span></p>
               </template>
 
               <!-- A virtual custom action/buttons column -->
@@ -91,6 +91,7 @@
         },
         selectedLoan: 0,
         selectedLoanInfo: {},
+        thresholdInfo: {},
         payments: [],
         paymentInputs: {
           loan_id: 0,
@@ -110,7 +111,7 @@
           { key: 'totalpaid', label: 'Total Paid', variant: 'success' },
           // A regular column
           { key: 'currentamount', label: 'Current Unpaid' },
-          'status',
+          { key: 'status',  sortable: true },
           // A virtual column for button
           { key: 'actions', label: 'Actions' }
         ]
@@ -125,6 +126,11 @@
         fetch("/api/payments/" + this.selectedLoan)
           .then(response => response.json())
           .then(data => this.payments = data);
+      },
+      getThreshold() {
+        fetch("/api/threshold/" + this.uid)
+          .then(response => response.json())
+          .then(data => this.thresholdInfo = data);
       },
       setSelected(loan) {
         this.selectedLoan = loan.id;
@@ -168,6 +174,9 @@
         let d = new Date(date);
         return d.toLocaleDateString();
       }
+    },
+    created() {
+      this.getThreshold();
     }
   }
 </script>
@@ -186,8 +195,7 @@
     width: 90%;
   }
 
-  .main-list,
-  thead {
+  .main-list,  thead {
     font-size: 1em;
   }
 
@@ -221,4 +229,13 @@
   .table-striped tbody tr:nth-of-type(odd) {
     background-color: #fafafa !important;
   }
+
+  /*------------- Responsive part ------------*/
+
+  @media only screen and (max-width: 800px) {
+    .main-list {
+      width: 100%;
+    }
+  }
+
 </style>

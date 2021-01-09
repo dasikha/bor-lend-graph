@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="header">
+    <div class="appheader">
       <b-navbar toggleable="lg" type="dark">
         <b-navbar-brand href="#">In-a-Pinch</b-navbar-brand>
 
@@ -25,9 +25,11 @@
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
-      <div class="subheader"><p> </p></div>
+      <div class="subheader"> </div>
     </div>
-    <div class="quoteflash">Tip of the day: <i>"If you would be wealthy, think of saving as well as getting."</i> – <b>Benjamin Franklin</b></div>
+    <div class="quoteflash">
+      <b-icon icon="star-fill" variant="primary"></b-icon>
+      Quote of the day: <i>"The art is not in making money, but in keeping it."</i> – <b>Anonymous</b></div>
     <loan-page :uid="userId" :loantype="loantype" />
   </div>
 </template>
@@ -50,13 +52,6 @@
     methods: {
 
 
-    },
-    created() {
-
-    },
-    mounted() {
-
-
     }
 
   }
@@ -75,29 +70,23 @@
     color: #2c3e50;
     background-color: #ffffff;
   }
-
   .navbar {
     background-color: #1a73e8 !important;
     border-bottom: #5e94da 0.5px solid;
   }
-  #header {
-    box-shadow: 0px 2px 3px gray;
-    border-bottom: 1px solid black;   
-    background-color: #0080ff; 
-  }
   .subheader {
-    height: .5em;
-    padding-left: 20px;
-  }
-  .subheader > p {
-    font-weight: lighter;
-    font-size: 0.95em;
-    color: #a4eeb7;
+    position: relative;
+    height: 20px;
+    z-index: 5;
+    background-color: #0080ff;     
+    box-shadow: 0px 3px 3px rgb(54, 76, 117);
+    border-bottom: 1px solid black;   
   }
   .quoteflash {
+    position: relative;
     background-color: #e8f0fe;  
+    z-index: 2;
     padding: 20px 24px; 
-
     font-weight: normal;
     font-size: 14px;
     color: #424242;

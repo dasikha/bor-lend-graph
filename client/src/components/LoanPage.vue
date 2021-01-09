@@ -5,7 +5,7 @@
     </div>
     <loan-form @addLoan="addNewLoan" :uid="uid" :contacts="contacts" :categories="categories"
       :loantype="loantype" />
-    <loan-list :loans="loans" @deleteLoan="deleteLoanInfo" @addPayment="addNewPayment" />
+    <loan-list :loans="loans" :uid="uid" @deleteLoan="deleteLoanInfo" @addPayment="addNewPayment" />
   </div>
 </template>
 

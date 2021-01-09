@@ -27,13 +27,16 @@
               </b-form-textarea>
             </b-form-group>
           </b-col>
-          <b-col lg="12">
-            <b-button type="submit" variant="primary">Add a Borrow Information</b-button>
-            <b-button type="reset" variant="secondary">Reset</b-button>
+          <b-col lg="12" class="hiddendiv">
             <b-alert id="insertalert" v-if="show" show variant="success" dismissible fade>
               <strong>Success</strong>. The borrow information has been added. Thank you.
             </b-alert>
           </b-col>
+          <b-col lg="12">
+            <b-button type="submit" variant="primary">Add a Borrow Information</b-button>
+            <b-button type="reset" variant="secondary">Reset</b-button>
+          </b-col>
+
         </b-row>
       </b-container>
     </b-form>
@@ -62,7 +65,7 @@
           type: this.loantype,
         },
         showform: true,
-        show: false
+        show: true
       };
     },
     methods: {
@@ -103,12 +106,12 @@
     padding: 10px 15px;
     background-color: #ffffff;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     border: solid 1px #e4e4e4;
     width: 60%;
     border-radius: 0.5em;
-    margin-left: 25px;
-    margin-bottom: 20px;
+    margin: 0 25px 20px 25px;
+    /* margin-bottom: 20px; */
     /* box-shadow: 3px 5px 5px rgb(124, 124, 124); */
   }
 
@@ -128,11 +131,34 @@
   }
 
   #insertalert {
-    display: inline;
-    width: 60%;
-    height: 70%;
-    margin-left: 15px;
-    font-size: 0.95em;
+    font-size: 0.9em;
+    font-weight: normal;
     border: 5px white solid;
+  }
+
+  .alert-dismissible .close {
+    padding: 0 !important;
+  }
+
+  .hiddendiv {
+    height: 50px;
+  }
+.form-group {
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+.form-control, .custom-select {
+  font-size: 0.95em;
+}
+  .loanform .row .col {
+    margin-bottom: 5px;
+  }
+
+  @media only screen and (max-width: 800px) {
+    .loanform {
+      width: 100%;
+      margin-right: 0;
+      margin-left: 0;
+    }
   }
 </style>
