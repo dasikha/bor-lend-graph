@@ -1,79 +1,75 @@
 <template>
-  <b-container fluid>
-    <b-row>
-      <b-col>
-        <b-modal id="modal-delete-loan" title="Delete" @ok="handleDelete">
-          This will delete all the records for this loan entry.
-          Are you sure?
-        </b-modal>
-        
-        <b-modal id="modal-pay-loan" title="Insert Payment Information"  hide-footer ref="modal"
-          @hidden="resetPayModal" @show="setModalPay">
-          <div>Paid to: {{ selectedLoanInfo.name }} </div>                   
+  <div class="loanlist">
+    <b-container fluid>
+      <b-row>
+        <b-col>
+          <b-modal id="modal-delete-loan" title="Delete" @ok="handleDelete">
+            This will delete all the records for this loan entry.
+            Are you sure?
+          </b-modal>
+
+          <b-modal id="modal-pay-loan" title="Insert Payment Information" hide-footer ref="modal"
+            @hidden="resetPayModal" @show="setModalPay">
+            <div>Paid to: {{ selectedLoanInfo.name }} </div>
             <b-form @submit="handleAddPaymt">
-              <b-form-group
-                label="Date Payment Made:" label-for="datePaidInput"
-              >
-                <b-form-input
-                  type="date"
-                  id="datePaidInput"
-                  v-model="paymentInputs.date"
-                  required
-                ></b-form-input>
+              <b-form-group label="Date Payment Made:" label-for="datePaidInput">
+                <b-form-input type="date" id="datePaidInput" v-model="paymentInputs.date" required></b-form-input>
               </b-form-group>
-        
+
               <b-form-group label="Amount Paid:" label-for="amountPaidInput" description="The value in the Amount Paid, is the unpaid balance.
               You can put any amount if you're not paying full.">
-                <b-form-input
-                  type="number" step="any" min=1
-                  id="amountPaidInput"
-                  v-model.number="paymentInputs.amount_paid"
-                  placeholder="Enter amount"
-                  required 
-                ></b-form-input>
-              </b-form-group> 
+                <b-form-input type="number" step="any" min=1 id="amountPaidInput"
+                  v-model.number="paymentInputs.amount_paid" placeholder="Enter amount" required></b-form-input>
+              </b-form-group>
               <div class="custom-modal-footer">
-                <button class="btn btn-secondary mr-2" @click="$bvModal.hide('modal-pay-loan')" type="reset">Close</button>        
+                <button class="btn btn-secondary mr-2" @click="$bvModal.hide('modal-pay-loan')"
+                  type="reset">Close</button>
                 <button class="btn btn-primary ml-2" type="submit">Submit form</button>
               </div>
-          </b-form>
-        </b-modal>
+            </b-form>
+          </b-modal>
 
-        <b-modal id="modal-display-info" title="Borrow Details" scrollable ok-only @hidden="resetData" @ok="resetData">
-          <loan-details :loaninfo="selectedLoanInfo" :payments="payments" @shortDate="getLocaleDate" />
-        </b-modal>
-        
-        <div class="main-list">
-          <b-table default striped bordered small stacked="sm" table-variant="light" :fields="fields" :items="loans"
-            responsive="md">
-            <template #cell(date)="data">
-              {{ getLocaleDate(data.value) }}
-            </template>
+          <b-modal id="modal-display-info" title="Borrow Details" scrollable ok-only @hidden="resetData"
+            @ok="resetData">
+            <loan-details :loaninfo="selectedLoanInfo" :payments="payments" @shortDate="getLocaleDate" />
+          </b-modal>
 
-            <!-- A virtual custom action/buttons column -->
-            <template #cell(actions)="row">
-              <b-button-group>
-                <b-button size="sm" class="mr-1" v-b-modal.modal-delete-loan @click="selectedLoan = row.item.id ">
-                  <b-icon icon="trash-fill"></b-icon> Delete
-                </b-button>
-                <b-button size="sm" class="mr-1" v-b-modal.modal-pay-loan @click="setSelected(row.item)">
-                  <b-icon icon="cash-stack"></b-icon> Insert Payment Info
-                </b-button>
-                <b-button size="sm" class="mr-1" v-b-modal.modal-display-info @click="handleDisplay(row.item)">
-                  <b-icon icon="info-circle-fill"></b-icon> Show Details
-                </b-button>
-              </b-button-group>
-            </template>
+          <div class="main-list">
+            <b-table default striped stacked="sm" :fields="fields"
+              :items="loans" responsive="md">
+              <template #cell(date)="data">
+                {{ getLocaleDate(data.value) }}
+              </template>
 
-            <!-- Optional default data cell scoped slot -->
-            <template #cell()="data">
-              {{ data.value }}
-            </template>
-          </b-table>
-        </div>
-      </b-col>
-    </b-row>
-  </b-container>
+              <template #cell(status)="data">
+                <p class="text-capitalize"><b-badge :variant="[data.value === 'done' ? 'success' : 'secondary']"> {{ data.value }}</b-badge></p>
+              </template>
+
+              <!-- A virtual custom action/buttons column -->
+              <template #cell(actions)="row">
+                <b-button-group>
+                  <b-button size="sm" class="mr-1" v-b-modal.modal-delete-loan @click="selectedLoan = row.item.id ">
+                    <b-icon icon="trash-fill"></b-icon>
+                  </b-button>
+                  <b-button size="sm" class="mr-1" v-b-modal.modal-pay-loan @click="setSelected(row.item)">
+                    <b-icon icon="cash-stack"></b-icon> Add Payment
+                  </b-button>
+                  <b-button size="sm" class="mr-1" v-b-modal.modal-display-info @click="handleDisplay(row.item)">
+                    <b-icon icon="info-circle-fill"></b-icon> Show Details
+                  </b-button>
+                </b-button-group>
+              </template>
+
+              <!-- Optional default data cell scoped slot -->
+              <template #cell()="data">
+                {{ data.value }}
+              </template>
+            </b-table>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
+  </div>
 </template>
 
 <script>
@@ -109,9 +105,9 @@
           // A column that needs custom formatting
           { key: 'contact_number', label: 'Contact #' },
           // A regular column
-          { key: 'initial_amount', label: 'Amount Borrowed', sortable: true }, '',
+          { key: 'initial_amount', label: 'Amount Borrowed', variant: 'warning', sortable: true }, '',
           // A regular column
-          { key: 'totalpaid', label: 'Total Paid' },
+          { key: 'totalpaid', label: 'Total Paid', variant: 'success' },
           // A regular column
           { key: 'currentamount', label: 'Current Unpaid' },
           'status',
@@ -178,31 +174,51 @@
 
 
 <style>
+  .loanlist {
+    padding: 20px 0 0 10px;
+    background-color: #e8eaed;
+  }
   .main-list {
     background-color: #fff;
     border-radius: 5px;
-    box-shadow: 3px 3px 3px gray;
+    box-shadow: 0 1px 2px gray;
+    border: 1px solid #dadce0;
+    width: 90%;
   }
+
   .main-list,
   thead {
-    font-size: .95em;
+    font-size: 1em;
   }
+
   thead {
-    background-color: #484b8a;
+    background-color: #e1f5fe !important;
   }
+
   thead th {
-    color: white;
+    color: #01579b;
   }
+
+  .done {
+    font-weight: bold;
+    color:#1a960a;
+  }
+
   /* #e4c8d7 */
   .table button {
-    background-color: #93cdd1;
-    border-color: #93cdd1;
+    background-color: #01579b;
+    border-color: #01579b;
     /* background-color: #a7d0b8; */
   }
+
   .custom-modal-footer {
     text-align: right;
     border-top: lightgray solid 1px;
     margin-top: 10px;
     padding-top: 10px;
+  }
+
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fafafa !important;
   }
 </style>

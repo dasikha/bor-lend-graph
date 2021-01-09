@@ -70,7 +70,7 @@ router.get("/loans/summary/:id/:type", (req, res) => {
 
 //get threshold status data
 //ignore the threshold period and see if it is feasible without it or not
-//logically we do not want people to accumate loans more than the limit regardless of the period
+//logically we do not want people to accumalate loans more than the limit regardless of the period
 //if user want the threshold limited to the threshold period only then the API would be like:
 ///threshold/:id/:period (where period will get a value of yearly or mmonthly)
 router.get("/threshold/:id/", (req, res) => {

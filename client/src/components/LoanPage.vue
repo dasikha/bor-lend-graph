@@ -1,15 +1,11 @@
 <template>
   <div class="loanpage">
-    <b-container fluid>
-      <b-row>
-        <b-col>
-          <h5></h5>
-          <loan-form @addLoan="addNewLoan" :uid="uid" :contacts="contacts" :categories="categories"
-            :loantype="loantype" />
-          <loan-list :loans="loans" @deleteLoan="deleteLoanInfo" @addPayment="addNewPayment" />
-        </b-col>
-      </b-row>
-    </b-container>
+    <div class="pageheader">
+      <h4>My {{ loantype }} page</h4>
+    </div>
+    <loan-form @addLoan="addNewLoan" :uid="uid" :contacts="contacts" :categories="categories"
+      :loantype="loantype" />
+    <loan-list :loans="loans" @deleteLoan="deleteLoanInfo" @addPayment="addNewPayment" />
   </div>
 </template>
 
@@ -140,4 +136,15 @@
   }
 </script>
 
-<syle></syle>
+<style>
+  .loanpage, input {
+    font-size: 0.9em;
+  }
+  .pageheader {
+    color: #1a73e8;   
+    font-size: 24px;    
+    text-transform: capitalize;
+    margin-left: 25px;
+  }
+
+</style>
