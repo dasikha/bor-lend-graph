@@ -65,7 +65,7 @@
           type: this.loantype,
         },
         showform: true,
-        show: true
+        show: false
       };
     },
     methods: {
