@@ -6,7 +6,7 @@
                 <b-col>Date Entered: {{ loaninfo.date }}</b-col>
             </b-row>
             <b-row>
-                <b-col>Amount Borrowed: {{ loaninfo.inital_amount }}</b-col>
+                <b-col>Amount Borrowed: ${{ loaninfo.inital_amount }}</b-col>
                 <b-col>Category: {{ loaninfo.category_name }}</b-col>
             </b-row>
             <b-row>
@@ -34,6 +34,9 @@
         props: {
             loaninfo: Object,
             payments: Array
+        },
+        method: {
+
         }
     }
 </script>

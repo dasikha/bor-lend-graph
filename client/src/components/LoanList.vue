@@ -35,7 +35,7 @@
           </b-modal>
 
           <div class="main-list">
-            <b-table default small striped stacked="sm" :fields="fields"
+            <b-table default striped stacked="sm" :fields="fields"
               :items="loans" responsive="md">
               <template #cell(date)="data">
                 {{ getLocaleDate(data.value) }}
@@ -62,7 +62,10 @@
 
               <!-- Optional default data cell scoped slot -->
               <template #cell()="data">
-                {{ data.value }}
+                <p v-if="typeof(data.value) === 'number'" class="text-right">
+                   ${{ data.value.toFixed(2) }} </p>
+
+                <p v-else>{{ data.value }}</p>
               </template>
             </b-table>
           </div>
@@ -196,19 +199,21 @@
   }
 
   .main-list,  thead {
-    font-size: 1em;
+    font-size: 1rem;
   }
 
-  thead {
-    background-color: #e1f5fe !important;
-  }
+  thead, th.table-warning, th.table-success {
+    background-color: #289eff !important;
+   }
 
   thead th {
-    color: #01579b;
+    color: #f6f9ff; /* #01579b; */
+    font-weight: normal;
+    height: 2em;
   }
 
   .done {
-    font-weight: bold;
+    font-weight :bold;
     color:#1a960a;
   }
 
@@ -227,7 +232,7 @@
   }
 
   .table-striped tbody tr:nth-of-type(odd) {
-    background-color: #fafafa !important;
+    background-color: #f5f5f5 !important;
   }
 
   /*------------- Responsive part ------------*/
