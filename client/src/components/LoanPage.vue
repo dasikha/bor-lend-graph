@@ -5,6 +5,7 @@
     </div>
     <loan-form @addLoan="addNewLoan" :uid="uid" :contacts="contacts" :categories="categories"
       :loantype="loantype" />
+    <!-- <threshold-bar :thresholdInfo="thresholdInfo" /> -->
     <loan-list :loans="loans" :uid="uid" @deleteLoan="deleteLoanInfo" @addPayment="addNewPayment" />
   </div>
 </template>
@@ -12,6 +13,7 @@
 <script>
   import LoanForm from './LoanForm.vue';
   import LoanList from './LoanList.vue';
+  // import ThresholdBar from './ThresholdBar.vue'
 
   export default {
     components: { LoanForm, LoanList },
@@ -24,7 +26,8 @@
       return {
         categories: [],
         contacts: [],
-        loans: []
+        loans: [],
+        thresholdInfo: {}
       };
     },
     methods: {
@@ -58,6 +61,14 @@
             console.error("Error in get loan: ", error);
           });
       },
+      getThreshold() {
+        fetch("/api/threshold/" + this.uid)
+          .then(response => response.json())
+          .then(data => {
+            this.thresholdInfo = data[0];
+            // console.log(this.thresholdInfo)
+          });
+      },      
       addNewLoan(data) {
         fetch("/api/loans", {
           method: "POST",
@@ -127,6 +138,7 @@
       this.getCategories();
       this.getContacts(this.uid);
       this.getLoansSummary(this.uid, this.loantype);
+      this.getThreshold();
     },
     mounted() {
       // this.getCategories();

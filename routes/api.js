@@ -75,7 +75,13 @@ router.get("/loans/summary/:id/:type", (req, res) => {
 ///threshold/:id/:period (where period will get a value of yearly or mmonthly)
 router.get("/threshold/:id/", (req, res) => {
   // Send back the full list of items
-  db("select u.threshold_limit, sum(l.initial_amount), sum(ifnull(p.amount_paid,0)), sum(l.initial_amount) - sum(ifnull(p.amount_paid,0)) from users u inner join loan l on u.id = l.user_id inner join payment p on l.id = p.loan_id where u.id = ? and l.status = 'active' group by u.id ;", req.params.id)
+  let sqlStr = "select b.threshold_limit, (sum(a.amt) - sum(a.paid)) cur_amt "
+    + "from (select sum(initial_amount) amt, 0 paid from loan where user_id =1 and status = 'active' and type = 'borrow' "
+    + " union all select 0 amt, sum(amount_paid) paid from payment p "
+    + " right join loan l on p.loan_id= l.id  where user_id =1 and status = 'active' and type = 'borrow') a, users b "
+    + " where b.id = ?;"
+
+  db(sqlStr, req.params.id)
     .then(results => {
       res.send(results.data);
     })

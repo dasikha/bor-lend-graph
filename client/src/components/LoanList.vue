@@ -3,6 +3,16 @@
     <b-container fluid>
       <b-row>
         <b-col>
+          <!-- <b-progress :max="thresholdInfo[0].threshold_limit" height="2rem">
+            <b-progress-bar :value="thresholdInfo[0].cur_amt">
+              <span>Progress: <strong>{{ value }} / {{ max }}</strong></span>
+            </b-progress-bar>
+          </b-progress> -->
+
+          <!-- {{ thresholdInfo[0].limit }} {{ thresholdInfo[0].cur_amt }} {{ cur_amtThreshold }} -->
+           <!-- = (this.thresholdInfo[0].cur_amt > this.thresholdInfo[0].threshold_limit) 
+          ? this.thresholdInfo[0].threshold_limit : this.thresholdInfo[0].cur_amt; -->
+
           <b-modal id="modal-delete-loan" title="Delete" @ok="handleDelete">
             This will delete all the records for this loan entry.
             Are you sure?
@@ -94,7 +104,8 @@
         },
         selectedLoan: 0,
         selectedLoanInfo: {},
-        thresholdInfo: {},
+        //thresholdInfo: [],
+        cur_amtThreshold: 0,
         payments: [],
         paymentInputs: {
           loan_id: 0,
@@ -130,17 +141,11 @@
           .then(response => response.json())
           .then(data => this.payments = data);
       },
-      getThreshold() {
-        fetch("/api/threshold/" + this.uid)
-          .then(response => response.json())
-          .then(data => this.thresholdInfo = data);
-      },
       setSelected(loan) {
         this.selectedLoan = loan.id;
         this.selectedLoanInfo = loan;
       },
       handleDisplay(loan) {
-        //console.log(loan);
         this.setSelected(loan);
         this.getPayments();
       },
@@ -178,8 +183,12 @@
         return d.toLocaleDateString();
       }
     },
-    created() {
-      this.getThreshold();
+    mounted() {
+     },
+    created () {
+      // this.getThreshold();
+      // this.cur_amtThreshold =(this.thresholdInfo[0].cur_amt > this.thresholdInfo[0].threshold_limit) 
+      //     ? this.thresholdInfo[0].threshold_limit : this.thresholdInfo[0].cur_amt; 
     }
   }
 </script>
@@ -233,6 +242,12 @@
 
   .table-striped tbody tr:nth-of-type(odd) {
     background-color: #f5f5f5 !important;
+  }
+
+  #grad {
+    height: 50px;
+    background-color: gray; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to bottom right, #b5c1d1, #f4f6f9);
   }
 
   /*------------- Responsive part ------------*/
