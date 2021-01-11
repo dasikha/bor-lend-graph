@@ -57,8 +57,8 @@ The MVP for the borrowing section will mainly be on the loan creation and listin
 ![DB Schema](docs/proj1_db_scheme.PNG)
 
 * [DB Design](https://app.dbdesigner.net/dashboard#)
-* will change this later : need to find the correct markdown
-* [API Routes Design](https://github.com/njas17/bor-lend/docs/Bor-Lend_API_Routes_Design.docx)
+
+* [API Routes Design](https://docs.google.com/document/d/1Wg9DPmdZhoawXzJmP_82v_M2K7jV_KZY/edit)
 
 ## Technology
 
