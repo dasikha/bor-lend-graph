@@ -1,4 +1,4 @@
-# Fullstack
+# Fullstack - BOR-LEND (Borrow Lend Tracker)
 
 In this repository, you will use Nodes/Express, mySQL and Vue to build an SPA (Single Page Application) for the MVP.
 
@@ -8,6 +8,8 @@ In this repository, you will use Nodes/Express, mySQL and Vue to build an SPA (S
 * [Database Schema and API](#database-schema-and-api)
 * [Setup](#setup)
 * [Basic Requirements](#basic-requirements)
+* [MVP](#mvp)
+* [Future Feature](#future_feature)
 
 ## Project Description
 
@@ -15,18 +17,30 @@ The overall project is to assist user to monitor the borrowing and lending activ
 
 ### Borrower Definition
 
-FOR individual borrower
-WHO wants to monitor the money that they borrowed from other individual.
-THE application IS a web-based system
-THAT helps the borrower to keep track the amount they borrowed and have overview over their borrowing limit
-UNLIKE jotting down on paper or some files
-THIS APPLICATION keeps the history of the borrowing as well the payment made without the user having problem to remember how much was borrowed or paid.
+**FOR** individual borrower
+**WHO** wants to monitor the money that they borrowed from other individual.
+**THE** application **IS** a web-based system
+**THAT** helps the borrower to keep track the amount they borrowed and have overview over their borrowing limit
+**UNLIKE** jotting down on paper or some files
+**THIS APPLICATION** keeps the history of the borrowing as well the payment made without the user having problem to remember how much was borrowed or paid.
 
 ### MVP
 
 The MVP for the borrowing section will mainly be on the loan creation and listing (borrow data), loan history insertion of the payment information and deletion of the borrow activities. At the same time, there is a summary of the total payment done and current borrowed amount.
 
-### Objectives
+### Future Feature
+
+* UI part/fixes which has not been addressed in this iteration – date display (in short format), total summary
+* Threshold – borrow limit overview (in progress)
+* User registration and Login
+* Refactor – split the code into components
+* Main page
+* Lending page
+* Dashboard for the borrowing/lending overview
+  Chart - total amount/summary by a lender or borrower
+* Mobile version
+
+### Project Dev Objectives
 
 * Use API, components (Vue) for the client/frontend and mySQL to build the borrow SPA.
 * Pass props to child components and propogate changes back up to parent components.
@@ -37,8 +51,18 @@ The MVP for the borrowing section will mainly be on the loan creation and listin
 
 ![DB Schema](docs/proj1_db_scheme.PNG)
 
+* [DB Design](https://app.dbdesigner.net/dashboard#)
 * will change this later : need to find the correct markdown
 * [API Routes Design](https://github.com/njas17/bor-lend/docs/Bor-Lend_API_Routes_Design.docx)
+
+## Technology
+
+* Wireframe – balsamiq.com
+* Database schema design – dbdesigner
+* Database system - mySQL
+* Express, Vue, Bootstrap Vue
+* Postman - testing API
+* Task management - Microsft Project
 
 ## Setup
 
@@ -79,6 +103,8 @@ The MVP for the borrowing section will mainly be on the loan creation and listin
   d. Black: Overborrowed. Please reflect!
 
 ![Borrow View](docs/borrow_activity_view.png)
+
+* The whole mock-ups are [here](https://balsamiq.cloud/su4rjdf/p3lwq8k/r2278)
 
 ### 2. Borrow listing
 
