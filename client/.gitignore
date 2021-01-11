@@ -5,6 +5,7 @@ node_modules
 # local experimental files
 Test*.vue
 *_bak.vue
+tst/
 
 # local env files
 .env.local
