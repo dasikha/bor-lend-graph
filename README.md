@@ -18,10 +18,15 @@ The overall project is to assist user to monitor the borrowing and lending activ
 ### Borrower Definition
 
 **FOR** individual borrower
+
 **WHO** wants to monitor the money that they borrowed from other individual.
+
 **THE** application **IS** a web-based system
-**THAT** helps the borrower to keep track the amount they borrowed and have overview over their borrowing limit
+
+**THAT** helps the borrower to keep track the amount they borrowed and have an overview over their borrowing limit
+
 **UNLIKE** jotting down on paper or some files
+
 **THIS APPLICATION** keeps the history of the borrowing as well the payment made without the user having problem to remember how much was borrowed or paid.
 
 ### MVP
