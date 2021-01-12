@@ -96,7 +96,7 @@ The MVP for the borrowing section will mainly be on the loan creation and listin
   DB_PASS=YOURPASSWORD
 ```
 
-* Run `npm run migrate` in the main folder of this repository, in a new terminal window. This will create 5 tables of the borrowerlender database with some dummy data.
+* Run `npm run migrate` in the main folder of this repository, in a new terminal window. This will create 5 tables of the borrowlend database with some dummy data.
 
 ## Basic Requirements
 
