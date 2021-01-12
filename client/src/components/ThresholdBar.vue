@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <b-progress :max="thresholdInfo.threshold_limit" height="2rem">
-            <b-progress-bar :value="thresholdCurMax">
-              <span>Progress: <strong>{{ value }} / {{ max }}</strong></span>
+    <div class="summary">
+        <b-progress v-if="thresholdInfo" max="thresholdInfo.threshold_limit" height="2rem">
+            <b-progress-bar :value="value" >
+              <span>Progress: <strong>{{ value }} / {{ thresholdInfo.threshold_limit }} </strong></span>
             </b-progress-bar>
           </b-progress>
           
@@ -15,21 +15,20 @@
         props: {
             thresholdInfo: Object,
         },
-        data() {
-            console.log(this.thresholdInfo.cur_amt);
-            this.thresholdCurMax = (this.thresholdInfo.cur_amt > this.thresholdInfo.threshold_limit)
-                ? this.thresholdInfo.threshold_limit : this.thresholdInfo.cur_amt;
-            return {
-                thresholdCurMax: 0
+        computed: {
+            // max: function() {
+            //     return this.$props.thresholdInfo.threshold_limit;
+            // },
+            value: function() {
+                return (this.thresholdInfo.cur_amt > this.thresholdInfo.threshold_limit)
+                 ? this.thresholdInfo.threshold_limit : this.thresholdInfo.cur_amt;
             }
-        },
-        created () {
-            this.thresholdCurMax = (this.thresholdInfo.cur_amt > this.thresholdInfo.threshold_limit)
-                ? this.thresholdInfo.threshold_limit : this.thresholdInfo.cur_amt;
-        }
+        }        
     }
 </script>
 
 <style>
-
+.summary {
+    width: 60%;
+}
 </style>

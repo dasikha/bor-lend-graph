@@ -5,7 +5,7 @@
     </div>
     <loan-form @addLoan="addNewLoan" :uid="uid" :contacts="contacts" :categories="categories"
       :loantype="loantype" />
-    <!-- <threshold-bar :thresholdInfo="thresholdInfo" /> -->
+    <threshold-bar :thresholdInfo="thresholdInfo" />
     <loan-list :loans="loans" :uid="uid" @deleteLoan="deleteLoanInfo" @addPayment="addNewPayment" />
   </div>
 </template>
@@ -13,10 +13,10 @@
 <script>
   import LoanForm from './LoanForm.vue';
   import LoanList from './LoanList.vue';
-  // import ThresholdBar from './ThresholdBar.vue'
+  import ThresholdBar from './ThresholdBar.vue'
 
   export default {
-    components: { LoanForm, LoanList },
+    components: { LoanForm, LoanList, ThresholdBar },
     name: 'LoanPage',
     props: {
       uid: Number,
@@ -28,7 +28,7 @@
         contacts: [],
         loans: [],
         thresholdInfo: {}
-      };
+      }
     },
     methods: {
       getCategories() {
@@ -66,6 +66,8 @@
           .then(response => response.json())
           .then(data => {
             this.thresholdInfo = data[0];
+            // this.thresholdInfo.threshLimit = data[0].threshold_limit;
+            // this.thresholdInfo.sumUnpaid = data[0].cur_amt
             // console.log(this.thresholdInfo)
           });
       },      

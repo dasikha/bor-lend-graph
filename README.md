@@ -33,17 +33,23 @@ The overall project is to assist user to monitor the borrowing and lending activ
 
 The MVP for the borrowing section will mainly be on the loan creation and listing (borrow data), loan history insertion of the payment information and deletion of the borrow activities. At the same time, there is a summary of the total payment done and current borrowed amount.
 
+### Current Feature
+
+* Just a though - Borrower can add payment more than the borrowed money. The excess amount can be a'goodwill' or points to the lender. Or a plus point to the borrower of that lender genorisity
+
 ### Future Feature
 
 * UI part/fixes which has not been addressed in this iteration – date display (in short format), total summary
 * Threshold – borrow limit overview (in progress)
 * User registration and Login
 * Refactor – split the code into components
+* Reminder - could be a message to email/whatsapp or calendar settings
 * Main page
 * Lending page
 * Dashboard for the borrowing/lending overview
   Chart - total amount/summary by a lender or borrower
 * Mobile version
+* API for saving / financial tips (internal or external API)
 
 ### Project Dev Objectives
 
