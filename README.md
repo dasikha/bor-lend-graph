@@ -36,6 +36,7 @@ The MVP for the borrowing section will mainly be on the loan creation and listin
 ### Current Feature
 
 * Just a though - Borrower can add payment more than the borrowed money. The excess amount can be a'goodwill' or points to the lender. Or a plus point to the borrower of that lender genorisity
+* The threshold has yet to display different color based on the basic requirement.
 
 ### Future Feature
 

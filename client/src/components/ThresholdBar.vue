@@ -30,5 +30,6 @@
 <style>
 .summary {
     width: 60%;
+    margin: 10px 0 20px 25px;
 }
 </style>
