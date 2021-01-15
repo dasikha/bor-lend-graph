@@ -32,16 +32,19 @@
       Quote of the day: <i>"The art is not in making money, but in keeping it."</i> – <b>Anonymous</b>
     </div>
     <loan-page :uid="userId" :loantype="loantype" />
+    <!-- <LineChart/> -->
   </div>
 </template>
 
 <script>
   import LoanPage from './components/LoanPage.vue';
+  // import LineChart from './components/LineChart.vue';
 
   export default {
     name: 'App',
     components: {
-      LoanPage
+      LoanPage,
+      // LineChart
     },
     data() {
       return {

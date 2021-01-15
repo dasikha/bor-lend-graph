@@ -1,11 +1,18 @@
 import Vue from 'vue';
 import App from './App.vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+
 //import { LayoutPlugin, TablePlugin, FormPlugin, ButtonPlugin, ModalPlugin, NavbarPlugin } from 'bootstrap-vue';
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+
+// Import Chartkick and chart.js
+import Chartkick from 'vue-chartkick'
+import Chart from 'chart.js'
+
+Vue.use(Chartkick.use(Chart))
 
 // Vue.use(LayoutPlugin);
 // Vue.use(TablePlugin);
