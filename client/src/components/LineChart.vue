@@ -5,12 +5,12 @@
       <div class="row">
         
         <div class="input-field col s3">
-          <input id="amount" type="text" class="validate" ref='temp'>
+          <input id="amount" type="text" class="validate" ref='currentamount'>
           <label for="amount">Amount</label>
         </div>
 
         <div class="input-field col s3">
-          <input id="date" type="text" class="validate" ref='hum'>
+          <input id="date" type="text" class="validate" ref='date'>
           <label for="date">Date</label>
         </div>
         
@@ -110,7 +110,7 @@ export default {
           axios.get(url, headers)
           .then((x)=> {
             // only print from the data. so it prints the array
-            // console.log(x); 
+            console.log(x); 
             let results = x.data
             let amount = []
             let date = []
@@ -134,6 +134,27 @@ export default {
         },
         // postData function
         postData() {
+          alert("You clicked me!");
+          let url = "http://localhost:5000/api/loans/summary/1/borrow"
+          let headers = {
+            headers: {
+              'Content-Type' : 'application/json',
+            }
+          }
+          let dataBody = {
+            data : {
+              currentamount : this.$refs.currentamount.value,
+              date: this.$refs.date.value
+            }
+          }
+          axios.post(url, dataBody, headers)
+          .then(()=> {
+            alert("Data posted successfully");
+            this.getData();
+          })
+          .catch(()=> {
+            alert("Failed to post the data!");
+          })
 
         }
 
