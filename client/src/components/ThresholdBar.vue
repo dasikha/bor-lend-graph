@@ -2,10 +2,9 @@
     <div class="summary">
         <b-progress v-if="thresholdInfo" max="thresholdInfo.threshold_limit" height="2rem">
             <b-progress-bar :value="value" >
-              <span>Progress: <strong>{{ value }} / {{ thresholdInfo.threshold_limit }} </strong></span>
+            <span>Progress: <strong>{{ value }} / {{ thresholdInfo.threshold_limit }} </strong></span>
             </b-progress-bar>
-          </b-progress>
-          
+        </b-progress>
     </div>
 </template>
 
@@ -21,7 +20,7 @@
             // },
             value: function() {
                 return (this.thresholdInfo.cur_amt > this.thresholdInfo.threshold_limit)
-                 ? this.thresholdInfo.threshold_limit : this.thresholdInfo.cur_amt;
+                ? this.thresholdInfo.threshold_limit : this.thresholdInfo.cur_amt;
             }
         }        
     }

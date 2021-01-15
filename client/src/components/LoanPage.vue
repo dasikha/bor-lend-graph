@@ -8,7 +8,8 @@
     <threshold-bar :thresholdInfo="thresholdInfo" />
     <loan-list :loans="loans" :uid="uid" @deleteLoan="deleteLoanInfo" @addPayment="addNewPayment" />
     <br/>
-    <LineChart/>
+    <!-- <line-chart :chartdata="chartData" :options="chartOptions"/> -->
+    <!-- <LineChart/> -->
   </div>
 </template>
 
@@ -16,10 +17,10 @@
   import LoanForm from './LoanForm.vue';
   import LoanList from './LoanList.vue';
   import ThresholdBar from './ThresholdBar.vue';
-  import LineChart from './LineChart.vue';
+  // import LineChart from './LineChart.vue';
 
   export default {
-    components: { LoanForm, LoanList, ThresholdBar, LineChart},
+    components: { LoanForm, LoanList, ThresholdBar},
     name: 'LoanPage',
     props: {
       uid: Number,
@@ -30,7 +31,7 @@
         categories: [],
         contacts: [],
         loans: [],
-        thresholdInfo: {},
+        thresholdInfo: {}
       }
     },
     methods: {
