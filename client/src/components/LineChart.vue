@@ -58,7 +58,7 @@ export default {
             datacollection: null,
             loaded: false,
             borrow: [0,1,2,3,4,5,6,7,8,9],
-            // lend: [9,8,7,6,5,4,3,2,1,0],
+            lend: [400,350,100,0,0,500], // dummy data
             // month: ['January','February', 'March', 'April', 'May' ] // x-axis
             date: [0,1,2,3,4,5,6,7,8,9]
         }
@@ -114,7 +114,7 @@ export default {
             let results = x.data
             let amount = []
             let date = []
-            for(let i = 5; i >= 0; i--) {
+            for(let i = 0; i < results.length; i++) {
               let a = parseInt(results[i].currentamount)
               let det = results[i].date.split("T")
 
@@ -123,7 +123,7 @@ export default {
             }
             this.borrow = amount
             this.date = date
-            // this.loaded = true
+            this.loaded = true
             this.fillData()
           })
           .catch(()=> {
