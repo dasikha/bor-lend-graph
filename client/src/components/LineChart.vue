@@ -2,9 +2,8 @@
 <div class="small">
     
     <form class="col s12">
-      <div class="row">
-        
-        <div class="input-field col s3">
+      <div class="row">  
+        <!-- <div class="input-field col s3">
           <input id="amount" type="text" class="validate" ref='currentamount'>
           <label for="amount">Amount</label>
         </div>
@@ -12,35 +11,32 @@
         <div class="input-field col s3">
           <input id="date" type="text" class="validate" ref='date'>
           <label for="date">Date</label>
-        </div>
+        </div> -->
         
         <div class='col s3'>
           <div class="row">
-
             <!-- Get button -->
-            <b-button class="getButton" btn-small teal
+            <b-button pill variant="success" size="sm" class="getButton"
             @click="getData()"
             >
               <i class="material-icons">Get data</i>
             </b-button>
 
-            <b-button class="getButton" btn-small pink
+            <!-- <b-button class="getButton" btn-small pink
             @click="postData()"
             >
               <i class="material-icons">Post Data</i>
-            </b-button>
+            </b-button> -->
           </div>
         </div>
 
       </div>
     </form>
-
+    <br>
     <LineChart
         :chart-data="datacollection"
-        />
-  
+        /> 
   </div>
-
 </template>
 
 
@@ -77,7 +73,7 @@ export default {
                 datasets: [
                     {
                         label: 'Borrow',
-                        backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
                         borderColor: 'lightblue',
                         pointBackgroundColor: 'red',
                         borderWidth: 1,
@@ -88,7 +84,7 @@ export default {
                     },
                     {
                         label: 'Lend',
-                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                        backgroundColor: 'rgba(255, 0, 0, 0.2)',
                         borderColor: 'lightblue',
                         pointBackgroundColor: 'blue',
                         borderWidth: 1,
@@ -133,31 +129,29 @@ export default {
 
         },
         // postData function
-        postData() {
-          alert("You clicked me!");
-          let url = "http://localhost:5000/api/loans/summary/1/borrow"
-          let headers = {
-            headers: {
-              'Content-Type' : 'application/json',
-            }
-          }
-          let dataBody = {
-            data : {
-              currentamount : this.$refs.currentamount.value,
-              date: this.$refs.date.value
-            }
-          }
-          axios.post(url, dataBody, headers)
-          .then(()=> {
-            alert("Data posted successfully");
-            this.getData();
-          })
-          .catch(()=> {
-            alert("Failed to post the data!");
-          })
-
-        }
-
+        // postData() {
+        //   alert("You clicked me!");
+        //   let url = "http://localhost:5000/api/loans/summary/1/borrow"
+        //   let headers = {
+        //     headers: {
+        //       'Content-Type' : 'application/json',
+        //     }
+        //   }
+        //   let dataBody = {
+        //     data : {
+        //       currentamount : this.$refs.currentamount.value,
+        //       date: this.$refs.date.value
+        //     }
+        //   }
+        //   axios.post(url, dataBody, headers)
+        //   .then(()=> {
+        //     alert("Data posted successfully");
+        //     this.getData();
+        //   })
+        //   .catch(()=> {
+        //     alert("Failed to post the data!");
+        //   })
+        // }
     }
 }
 </script>
@@ -168,5 +162,15 @@ export default {
       height: 100px;
       margin: auto
     }
+
+  .getButton {
+  margin: 0;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  }
+  
 
 </style>

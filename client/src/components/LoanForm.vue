@@ -9,6 +9,7 @@
               <b-form-select id="input-1" v-model="form.contact_id" :options="contacts" required></b-form-select>
             </b-form-group>
           </b-col>
+          <br>
           <b-col lg="5">
             <b-form-group id="input-group-2" label="Amount Borrowed:" label-for="input-2">
               <b-form-input id="input-2" v-model.number="form.initial_amount" type="number" step="any" min=1
@@ -33,10 +34,9 @@
             </b-alert>
           </b-col>
           <b-col lg="12">
-            <b-button type="submit" variant="primary">Add a Borrow Information</b-button>
-            <b-button type="reset" variant="secondary">Reset</b-button>
+            <b-button type="submit" pill variant="primary">Add a Borrow Information</b-button>
+            <b-button type="reset" pill variant="secondary">Reset</b-button>
           </b-col>
-
         </b-row>
       </b-container>
     </b-form>
@@ -108,7 +108,7 @@
     font-weight: bold;
     margin-bottom: 5px;
     border: solid 1px #e4e4e4;
-    width: 60%;
+    width: 50%;
     border-radius: 0.5em;
     margin: 0 25px 20px 25px;
     /* margin-bottom: 20px; */

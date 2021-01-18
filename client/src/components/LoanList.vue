@@ -196,8 +196,9 @@
 
 <style>
   .loanlist {
-    padding: 20px 0 0 10px;
-    background-color: #e8eaed;
+    padding: 20px 0 0 20px;
+    background-color: #ffffff;
+    text-align: center;
   }
   .main-list {
     background-color: #fff;

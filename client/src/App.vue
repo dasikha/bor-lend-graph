@@ -11,7 +11,6 @@
             <b-nav-item href="#">Borrow</b-nav-item>
             <b-nav-item href="#" disabled>Lend</b-nav-item>
           </b-navbar-nav>
-
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown right>
@@ -111,5 +110,7 @@
     /* For browsers that do not support gradients */
     background-image: linear-gradient(to bottom right, #b5c1d1, #f4f6f9);
   }
+
+
 
 </style>

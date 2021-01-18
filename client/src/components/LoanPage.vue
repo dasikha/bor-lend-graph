@@ -1,7 +1,9 @@
 <template>
   <div class="loanpage">
     <div class="pageheader">
+  
       <h4>My {{ loantype }} page</h4>
+      
     </div>
     <loan-form @addLoan="addNewLoan" :uid="uid" :contacts="contacts" :categories="categories"
       :loantype="loantype" />
@@ -10,6 +12,7 @@
     <br/>
     <!-- <line-chart :chartdata="chartData" :options="chartOptions"/> -->
     <!-- <LineChart/> -->
+    
   </div>
 </template>
 
@@ -20,7 +23,7 @@
   // import LineChart from './LineChart.vue';
 
   export default {
-    components: { LoanForm, LoanList, ThresholdBar},
+    components: { LoanForm, LoanList, ThresholdBar },
     name: 'LoanPage',
     props: {
       uid: Number,
@@ -155,10 +158,14 @@
 </script>
 
 <style>
+
   .loanpage, input {
     font-size: 0.9em;
+    /* text-align: center; */
+    width: 100%
   }
   .pageheader {
+    /* text-align: center; */
     color: #1a73e8;   
     font-size: 24px;    
     text-transform: capitalize;

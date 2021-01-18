@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import Vuetify from 'vuetify';
 
 //import { LayoutPlugin, TablePlugin, FormPlugin, ButtonPlugin, ModalPlugin, NavbarPlugin } from 'bootstrap-vue';
 
@@ -13,6 +14,7 @@ import Chartkick from 'vue-chartkick'
 import Chart from 'chart.js'
 
 Vue.use(Chartkick.use(Chart))
+Vue.use(Vuetify);
 
 // Vue.use(LayoutPlugin);
 // Vue.use(TablePlugin);
@@ -31,3 +33,6 @@ Vue.config.productionTip = false;
 new Vue({
   render: h => h(App),
 }).$mount('#app')
+
+export default new Vuetify({
+});
