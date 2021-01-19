@@ -33,6 +33,7 @@
       </div>
     </form>
     <br>
+    <!-- chart.js component -->
     <LineChart
         :chart-data="datacollection"
         /> 
@@ -47,14 +48,15 @@ import axios from 'axios'
 
 export default {
     components: {
-        LineChart
+        LineChart 
     },
+    // data state
     data() {
         return {
             datacollection: null,
             loaded: false,
             borrow: [0,1,2,3,4,5,6,7,8,9],
-            lend: [400,350,100,0,0,500], // dummy data
+            lend: [400,350,1000,500,100], // dummy data
             // month: ['January','February', 'March', 'April', 'May' ] // x-axis
             date: [0,1,2,3,4,5,6,7,8,9]
         }
@@ -65,6 +67,7 @@ export default {
         await this.getData()
 
     },
+    // create a function fillData() that will hold the data. it consists of datacollection
     methods: {
         fillData() {
             this.datacollection = {
@@ -79,7 +82,7 @@ export default {
                         borderWidth: 1,
                         pointBorderColor: 'red',
                         // data: [0,1,2,3,4,5,6,7,8,9], 
-                        data: this.borrow
+                        data: this.borrow // y-axis
 
                     },
                     {
@@ -89,7 +92,8 @@ export default {
                         pointBackgroundColor: 'blue',
                         borderWidth: 1,
                         pointBorderColor: 'blue',
-                        data: this.lend
+                        // data: [400,350,1000,500,100]
+                        data: this.lend // y-axis
 
                     }
                 ]
@@ -108,9 +112,10 @@ export default {
             // only print from the data. so it prints the array
             console.log(x); 
             let results = x.data
-            let amount = []
-            let date = []
+            let amount = [] // y-axis
+            let date = [] // x-axis
             for(let i = 0; i < results.length; i++) {
+              //parseInt convert string to integer
               let a = parseInt(results[i].currentamount)
               let det = results[i].date.split("T")
 
